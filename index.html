@@ -8,13 +8,15 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js'></script>
 <script src='STLLoader.js'></script>
 <script src='OrbitControls.js'></script>
+<script src='FileSaver.min.js'></script>
+<script src='STLExporter.js'></script>
 <title>Dulution Plates</title>
 </head>
 <body>
 <div id="inputs" class="clearfix">
     <input type="file" id="files" name="files[]" multiple />
 </div>
-
+<button onclick="saveModel()">Save Model</button>
 <div id="viewport"></div>
 
 <script>
@@ -127,6 +129,10 @@
     
     function render() {
         renderer.render( scene, camera );
+    }
+
+    function saveModel() {
+        saveSTL( scene, "dilution_plate.stl" );
     }
 
 </script>
