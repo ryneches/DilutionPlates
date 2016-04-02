@@ -9,6 +9,7 @@
 <script src='OrbitControls.js'></script>
 <script src='FileSaver.min.js'></script>
 <script src='STLExporter.js'></script>
+<script src='dilutionplates.js'></script>
 <title>Dulution Plates</title>
 </head>
 <body>
@@ -17,6 +18,9 @@
 </div>
 <button onclick="saveModel()">Save Model</button>
 <div id="viewport"></div>
-<script src='dilutionplates.js'></script>
+<script>
+    var camera, scene, renderer;
+    init();
+</script>
 </body>
 </html>

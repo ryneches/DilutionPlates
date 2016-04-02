@@ -54,10 +54,6 @@ function loadWells(file) {
     reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
 }
 
-var camera, scene, renderer;
-
-init();
-
 function init() {
     scene = new THREE.Scene();
     scene.add( new THREE.AmbientLight( 0x999999 ) );
@@ -75,7 +71,8 @@ function init() {
     renderer.setClearColor( 0x999999 );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( 800, 600 );
-    document.body.appendChild( renderer.domElement );
+    $('#viewport').append( renderer.domElement );
+    //document.body.appendChild( renderer.domElement );
     var controls = new THREE.OrbitControls( camera, renderer.domElement );
     controls.addEventListener( 'change', render );
     controls.target.set( 0, 1.2, 2 );
@@ -110,5 +107,5 @@ function render() {
 }
 
 function saveModel() {
-    saveSTL( scene, "dilution_plate.stl" );
+    saveSTL( scene, "dilution_plate" );
 }
