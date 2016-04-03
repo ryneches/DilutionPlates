@@ -2,6 +2,19 @@
 from numpy import linspace
 import subprocess
 import sys
+"""
+Generate n STLs for wells over a 1 cm depth.
+
+Usage :
+
+    $ ./make_blocks.py n
+
+To make wells in 0.1mm increments :
+
+    $ ./make_blocks.py 101
+
+Requires openscad to be available from the command line.
+"""
 
 base_dir = 'blocks'
 

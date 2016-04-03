@@ -18,6 +18,7 @@ of one another.
 
 ### Dependencies
 
+* ['OpenSCAD`](http://www.openscad.org/)
 * [`jQuery`](https://jquery.com/)
 * [`jquery-csv`](https://github.com/evanplaice/jquery-csv)
 * [`RequestAnimationFrame.js`](http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/)
