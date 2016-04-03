@@ -1,4 +1,4 @@
-var camera, scene, renderer;
+var camera, scene, renderer, plate;
 var blockcount =0;
 
 $(document).ready(function() {
@@ -65,6 +65,7 @@ function loadWells(file) {
 
 function init() {
     scene = new THREE.Scene();
+    plate = new THREE.Object3D();
     scene.add( new THREE.AmbientLight( 0x999999 ) );
     camera = new THREE.PerspectiveCamera( 35, 8 / 6, 1, 500 );
     // Z is up for objects intended to be 3D printed.
@@ -76,6 +77,11 @@ function init() {
     grid.setColors( 0xffffff, 0x555555 );
     //grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
     scene.add( grid );
+
+    plate.position.x = -50;
+    plate.rotation.x = -Math.PI/2;
+    scene.add(plate);
+
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setClearColor( 0x999999 );
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -100,7 +106,8 @@ function addBlock( file_name, x, y ) {
         mesh.scale.set( 1, 1, 1 );
         mesh.castShadow = true;
         mesh.receiveShadow = true;
-        scene.add( mesh );
+        plate.add(mesh);
+        //scene.add( mesh );
         blockcount++;
         console.log(blockcount)
         if(blockcount==96){
