@@ -10,14 +10,18 @@
 <script src='OrbitControls.js'></script>
 <script src='FileSaver.min.js'></script>
 <script src='STLExporter.js'></script>
-<title>Dulution Plates</title>
+<title>Dilution Plates</title>
 </head>
 <body>
-<div id="inputs" class="clearfix">
-    <input type="file" id="files" name="files[]" multiple />
-</div>
-<button onclick="saveModel()">Save Model</button>
-<div id="viewport"></div>
+  <div id="ui-section">
+    <div id="viewport"></div>
+    <img src="images/loader.gif" />
+    <div id="inputs" class="clearfix">
+        <input type="file" id="files" name="files[]" multiple />
+    </div>
+    <button onclick="saveModel()">Save Model</button>
+  </div>
+
 
 <script>
     $(document).ready(function() {
@@ -52,7 +56,7 @@
     function handleFileSelect(evt) {
         var files = evt.target.files; // FileList object
         var file = files[0];
-        loadWells(file);        
+        loadWells(file);
     }
 
     function loadWells(file) {
@@ -64,6 +68,7 @@
             var html = '';
             y = 0;
             for(var row in data) {
+                console.log("loading row: "+row);
                 x = 0;
                 for(var item in data[row]) {
                     file_name = 'blocks/block_' + (10*parseFloat(data[row][item])).toFixed(1) + '.stl';
@@ -76,22 +81,28 @@
         reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
     }
 
-    var camera, scene, renderer;
-    
+    var camera, cameraTarget, scene, renderer, plate;
+
     init();
-    
+
     function init() {
         scene = new THREE.Scene();
+        plate = new THREE.Object3D();
+        scene.add(plate);
+        plate.position.x= -50;
         scene.add( new THREE.AmbientLight( 0x999999 ) );
         camera = new THREE.PerspectiveCamera( 35, 8 / 6, 1, 500 );
+        cameraTarget = new THREE.Vector3( 0, 0, 0 );
         // Z is up for objects intended to be 3D printed.
-        camera.up.set( 0, 0, 1 );
-        camera.position.set( 0, -9, 300 );
+        //camera.up.set( 0, 0, 1 );
+        camera.position.set( 0, 10, 300 );
         camera.add( new THREE.PointLight( 0xffffff, 0.8 ) );
+        //camera.lookAt(scene.position);
+        camera.lookAt( cameraTarget );
         scene.add( camera );
         var grid = new THREE.GridHelper( 100, 10.0 );
         grid.setColors( 0xffffff, 0x555555 );
-        grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
+        //grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
         scene.add( grid );
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setClearColor( 0x999999 );
@@ -102,6 +113,8 @@
         controls.addEventListener( 'change', render );
         controls.target.set( 0, 1.2, 2 );
         controls.update();
+
+        //plate.rotation.x = Math.Pi/2;
         window.addEventListener( 'resize', onWindowResize, false );
     }
 
@@ -116,17 +129,18 @@
             mesh.scale.set( 1, 1, 1 );
             mesh.castShadow = true;
             mesh.receiveShadow = true;
-            scene.add( mesh );
+            plate.add(mesh);
+            //scene.add( mesh );
         } );
     }
-        
+
     function onWindowResize() {
         camera.aspect = 8 / 6;
         camera.updateProjectionMatrix();
         renderer.setSize( 800, 600 );
         render();
     }
-    
+
     function render() {
         renderer.render( scene, camera );
     }
