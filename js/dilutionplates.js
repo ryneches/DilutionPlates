@@ -1,4 +1,4 @@
-var camera, scene, renderer, plate, exportScene, exportPlate;
+var camera, scene, renderer, material, plate, exportScene, exportPlate;
 var blockcount =0;
 Dropzone.autoDiscover = false;
 
@@ -7,6 +7,7 @@ $(document).ready(function() {
         $('#files').bind('change', handleFileSelect);
     }
     init();
+    initText();
     animate();
 
     var myDropzone = new Dropzone("#dropzone", {
@@ -89,7 +90,9 @@ function init() {
     //grid.rotateOnAxis( new THREE.Vector3( 1, 0, 0 ), 90 * ( Math.PI/180 ) );
     scene.add( grid );
 
-    plate.position.x = -50;
+    material = new THREE.MeshPhongMaterial( { color: 0xff5533, specular: 0x111111, shininess: 200 } );
+
+    plate.position.x = -54;
     plate.rotation.x = -Math.PI/2;
     scene.add(plate);
 
@@ -110,7 +113,6 @@ function addBlock( file_name, x, y ) {
     // ASCII file
     var loader = new THREE.STLLoader();
     loader.load( file_name, function ( geometry ) {
-        var material = new THREE.MeshPhongMaterial( { color: 0xff5533, specular: 0x111111, shininess: 200 } );
         var mesh = new THREE.Mesh( geometry, material );
         mesh.position.set( 9 * x, 0, 9 * y );
         mesh.rotation.set( 0, 0, 0 );
@@ -123,6 +125,7 @@ function addBlock( file_name, x, y ) {
         console.log(blockcount)
         if(blockcount==96){
           $("#loading").hide();
+          showText();
         }
     } );
 }
