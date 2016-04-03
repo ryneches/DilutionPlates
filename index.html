@@ -1,15 +1,17 @@
 <!doctype html>
 <html>
 <head>
-<link rel='stylesheet' href='css/style.css' />
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js'></script>
-<script src='js/STLLoader.js'></script>
-<script src='js/RequestAnimationFrame.js'></script>
-<script src='js/OrbitControls.js'></script>
-<script src='js/FileSaver.min.js'></script>
-<script src='js/STLExporter.js'></script>
+  <link rel='stylesheet' href='css/dropzone.css' />
+  <link rel='stylesheet' href='css/style.css' />
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js'></script>
+  <script src='js/STLLoader.js'></script>
+  <script src='js/dropzone.js'></script>
+  <script src='js/RequestAnimationFrame.js'></script>
+  <script src='js/OrbitControls.js'></script>
+  <script src='js/FileSaver.min.js'></script>
+  <script src='js/STLExporter.js'></script>
 
 <title>Dilution Plates</title>
 </head>
@@ -25,9 +27,13 @@
       <div id="inputs" class="clearfix">
           <input type="file" id="files" name="files[]" multiple />
       </div>
-      <p>Target concentration : <input id="target_concentration" type="number" step=0.01 size=3 /> ng/&mu;L</p>
-      <button onclick="saveModel()">Save Model</button>
-      <p>This app only works in Chrome and Firefox. ;)</p>
+      <form action="/upload-target"  class="dropzone" id="dropzone"></form>
+      <div id="concentration">
+        <label>Target concentration : </label>
+        <input id="target_concentration" type="number" step=0.01 size=3 /> ng/&mu;L
+      </div>
+      <button onclick="saveModel()" class="main-button">Save Model</button>
+
     </div>
     <div id="viewport">
     </div>

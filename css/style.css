@@ -1,3 +1,6 @@
+*{
+  font-family: Tahoma;
+}
 #container {
   width:1100px;
 }
@@ -20,4 +23,69 @@
 //  position: absolute;
   margin:auto;
   z-index: 2;
+}
+
+
+#inputs {
+  display: none;
+}
+.main-button {
+  padding: 15px;
+  background-color: rgba(0,133,255,.8);
+  color: white;
+  border: 0px solid rgba(0,133,255,.5);
+  border-radius: 5px;
+  width:100%;
+  font-size:18px;
+  font-weight: bold;
+  margin-top:10px;
+  cursor: pointer;
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+}
+.main-button:hover {
+  background-color: rgba(0,133,255,1);
+  color: white;
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+}
+
+label {
+  margin-bottom: 8px;
+  display: inline-block;
+  font-weight: bold;
+}
+#concentration {
+  border: 3px solid rgba(0,133,255,.5);
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 20px;
+}
+#dropzone {
+  width: 100%;
+  height: 200px;
+  border: 3px solid rgba(0,133,255,.5);
+  border-radius: 5px;
+}
+#dropzone:hover {
+  background-color: rgba(0,133,255,.1);
+}
+.dropzone #dz-error-message {
+  display:none;
+  opacity:0;
+}
+.dropzone #data-dz-errormessage{
+  display:none;
+}
+.dropzone .dz-message span{
+  color: #0085FF;
+  font-weight: bold;
 }

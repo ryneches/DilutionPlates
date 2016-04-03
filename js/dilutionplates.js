@@ -1,5 +1,6 @@
 var camera, scene, renderer, plate, exportScene, exportPlate;
 var blockcount =0;
+Dropzone.autoDiscover = false;
 
 $(document).ready(function() {
     if(isAPIAvailable()) {
@@ -7,6 +8,16 @@ $(document).ready(function() {
     }
     init();
     animate();
+
+    var myDropzone = new Dropzone("#dropzone", {
+      acceptedFiles: '.csv',
+      dictDefaultMessage: "Import CSV File"
+      });
+    myDropzone.on("addedfile", function(file) {
+      /* Maybe display some more file information on your page */
+      $(".dz-success-mark").hide();
+      loadWells(file);
+    });
 });
 
 function isAPIAvailable() {

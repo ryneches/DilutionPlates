@@ -14,7 +14,7 @@ raw samples into the corresponding wells on the dilution plate. The
 samples will then be at the desired concentration.
 
 Dilution ratios among the samples must be within about a factor of 100
-of one another. 
+of one another.
 
 ### Dependencies
 
@@ -26,3 +26,4 @@ of one another.
 * [`STLLoader.js`](http://threejs.org/examples/webgl_loader_stl.html)
 * [`STLExporter.js`](https://gist.github.com/kjlubick/fb6ba9c51df63ba0951f)
 * [`FileSaver.js`](https://github.com/eligrey/FileSaver.js/)
+* [`Dropzone.js`](http://www.dropzonejs.com/)
