@@ -63,8 +63,8 @@ function init() {
     scene.add( new THREE.AmbientLight( 0x999999 ) );
     camera = new THREE.PerspectiveCamera( 35, 8 / 6, 1, 500 );
     // Z is up for objects intended to be 3D printed.
-    camera.up.set( 0, 0, 1 );
-    camera.position.set( 0, -9, 300 );
+    //camera.up.set( 0, 0, 1 );
+    camera.position.set( 0, 150, 300 );
     camera.add( new THREE.PointLight( 0xffffff, 0.8 ) );
     scene.add( camera );
     var grid = new THREE.GridHelper( 100, 10.0 );

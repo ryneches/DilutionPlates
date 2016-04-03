@@ -13,14 +13,22 @@
 <title>Dilution Plates</title>
 </head>
 <body>
-  <div id="viewport">
-  </div>
-  <div id="ui-section">
-    <img src="images/loader.gif" />
-    <div id="inputs" class="clearfix">
-        <input type="file" id="files" name="files[]" multiple />
+  <div id="container">
+    <div id="ui-section">
+      <h2>Let's Make Some Dilution Plates!</h2>
+      <div id="loading">
+        <img src="images/loader.gif" />
+        <br>
+        Building Plate..
+      </div>
+      <div id="inputs" class="clearfix">
+          <input type="file" id="files" name="files[]" multiple />
+      </div>
+      <button onclick="saveModel()">Save Model</button>
+      <p>This app only works in Chrome and Firefox. ;)</p>
     </div>
-    <button onclick="saveModel()">Save Model</button>
+    <div id="viewport">
+    </div>
   </div>
 
 <script src='dilutionplates.js'></script>
