@@ -1,4 +1,4 @@
-var camera, scene, renderer, plate;
+var camera, scene, renderer, plate, exportScene, exportPlate;
 var blockcount =0;
 
 $(document).ready(function() {
@@ -132,5 +132,7 @@ function animate() {
 }
 
 function saveModel() {
-    saveSTL( scene, "dilution_plate" );
+    exportPlate = plate.clone();
+    exportPlate.rotation.x=0;
+    saveSTL( exportPlate, "dilution_plate" );
 }
