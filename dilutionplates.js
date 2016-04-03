@@ -1,11 +1,12 @@
 var camera, scene, renderer;
-
+var blockcount =0;
 
 $(document).ready(function() {
     if(isAPIAvailable()) {
         $('#files').bind('change', handleFileSelect);
     }
     init();
+    animate();
 });
 
 function isAPIAvailable() {
@@ -38,6 +39,7 @@ function handleFileSelect(evt) {
 }
 
 function loadWells(file) {
+    $("#loading").show();
     var reader = new FileReader();
     reader.readAsText(file);
     reader.onload = function(event){
@@ -45,7 +47,9 @@ function loadWells(file) {
         var data = $.csv.toArrays(csv);
         var html = '';
         y = 0;
+        blockcount =0;
         for(var row in data) {
+          console.log("making row "+row);
             x = 0;
             for(var item in data[row]) {
                 file_name = 'blocks/block_' + (10*parseFloat(data[row][item])).toFixed(1) + '.stl';
@@ -54,6 +58,7 @@ function loadWells(file) {
             }
             y++;
         }
+
     };
     reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
 }
@@ -81,6 +86,7 @@ function init() {
     controls.target.set( 0, 1.2, 2 );
     controls.update();
     window.addEventListener( 'resize', onWindowResize, false );
+    render();
 }
 
 function addBlock( file_name, x, y ) {
@@ -95,6 +101,11 @@ function addBlock( file_name, x, y ) {
         mesh.castShadow = true;
         mesh.receiveShadow = true;
         scene.add( mesh );
+        blockcount++;
+        console.log(blockcount)
+        if(blockcount==96){
+          $("#loading").hide();
+        }
     } );
 }
 
@@ -107,6 +118,10 @@ function onWindowResize() {
 
 function render() {
     renderer.render( scene, camera );
+}
+function animate() {
+  requestAnimationFrame( animate );
+  render();
 }
 
 function saveModel() {
