@@ -148,5 +148,5 @@ function animate() {
 function saveModel() {
     exportPlate = plate.clone();
     exportPlate.rotation.x=0;
-    saveSTL( exportPlate, "dilution_plate" );
+    saveSTL( scene, "dilution_plate" );
 }
