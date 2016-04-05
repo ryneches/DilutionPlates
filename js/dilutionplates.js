@@ -21,6 +21,23 @@ $(document).ready(function() {
     });
 });
 
+function loadCalibration() {
+    $.get("/calibration.csv", function(data) {
+        var matrix = $.csv.toArrays( data );
+        y = 0;
+        blockcount = 0;
+        for(var row in matrix) {
+            x = 0;
+            for(var item in matrix[row]) {
+                file_name = 'blocks/block_' + matrix[row][item] + '.stl';
+                addBlock( file_name, x, y );
+                x++;
+            }
+            y++;
+        }
+    });
+}
+
 function isAPIAvailable() {
     // Check for the various File API support.
     if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -59,9 +76,7 @@ function loadWells(file) {
         var data = $.csv.toArrays(csv);
         var html = '';
         y = 0;
-        blockcount =0;
         for(var row in data) {
-          console.log("making row "+row);
             x = 0;
             for(var item in data[row]) {
                 file_name = 'blocks/block_' + (10*parseFloat(data[row][item])).toFixed(1) + '.stl';
@@ -70,9 +85,13 @@ function loadWells(file) {
             }
             y++;
         }
-
     };
     reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
+    if(blockcount==96){
+        $("#loading").hide();
+        showText();
+    }
+
 }
 
 function init() {
@@ -121,12 +140,6 @@ function addBlock( file_name, x, y ) {
         mesh.receiveShadow = true;
         plate.add(mesh);
         //scene.add( mesh );
-        blockcount++;
-        console.log(blockcount)
-        if(blockcount==96){
-          $("#loading").hide();
-          showText();
-        }
     } );
 }
 

@@ -29,12 +29,12 @@
           <input type="file" id="files" name="files[]" multiple />
       </div>
       <form action="/upload-target"  class="dropzone" id="dropzone"></form>
+      <button onclick="loadCalibration()" class="main-button">Load Calibration</button>
       <div id="concentration">
         <label>Target concentration : </label>
         <input id="target_concentration" type="number" step=0.01 size=3 /> ng/&mu;L
       </div>
       <button onclick="saveModel()" class="main-button">Save Model</button>
-
     </div>
     <div id="viewport">
     </div>
