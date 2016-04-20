@@ -22,7 +22,7 @@ $(document).ready(function() {
 });
 
 function loadCalibration() {
-    $.get("/calibration.csv", function(data) {
+    $.get("calibration.csv", function(data) {
         var matrix = $.csv.toArrays( data );
         y = 0;
         blockcount = 0;
