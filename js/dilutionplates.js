@@ -22,6 +22,7 @@ $(document).ready(function() {
 });
 
 function loadCalibration() {
+    $("#loading").show();
     $.get("calibration.csv", function(data) {
         var matrix = $.csv.toArrays( data );
         y = 0;
@@ -36,6 +37,7 @@ function loadCalibration() {
             y++;
         }
     });
+    $("#loading").hide();
 }
 
 function isAPIAvailable() {
